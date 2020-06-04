@@ -15,6 +15,7 @@
         <form action="{{ route('admin.employee.'.(isset($item->id) ? 'update' : 'store'), isset($item->id) ? ['employee' => $item->id] : []) }}"
               method="POST">
             @csrf
+
             @isset($item->id)
                 @method('put')
             @endisset
