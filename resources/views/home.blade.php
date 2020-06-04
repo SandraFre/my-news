@@ -9,12 +9,23 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
-
-                    You are logged in!
+                    <table class="table">
+                        <tr>
+                            <td>{{__('E-mail')}}</td>
+                            <td>{{$user->email}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{__('Registered from')}}</td>
+                            <td>{{$user->created_at}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                <a href="" class="btn btn-sm btn-outline-primary">{{__('Edit')}}</a>
                 </div>
             </div>
         </div>

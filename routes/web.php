@@ -18,9 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
+Route::middleware('verified')->group(function () {
+    Route::get('/account', 'AccountController@index')->name('account.index');
+});
+
+//----------------------------------------
+// Admin side routes
+//----------------------------------------
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::namespace('Auth')->group(function () {
@@ -32,6 +38,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
             ->name('password.request');
         Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
             ->name('password.email');
+
         Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')
             ->name('password.reset');
         Route::post('password/reset', 'ResetPasswordController@reset')
@@ -40,5 +47,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'AdminHomeController')->name('home');
+
+        Route::resource('employee', 'EmployeeController');
     });
 });
