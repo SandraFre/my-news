@@ -25,6 +25,6 @@ class AccountController extends Controller
     {
         $user = auth()->user();
 
-        return view('home', ['user'=>$user]);
+        return view('front.account.index', ['user'=>$user]);
     }
 }
