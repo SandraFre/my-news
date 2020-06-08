@@ -49,5 +49,6 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
         Route::get('/', 'AdminHomeController')->name('home');
 
         Route::resource('employee', 'EmployeeController');
+        Route::resource('article', 'ArticleController');
     });
 });

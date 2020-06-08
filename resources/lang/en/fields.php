@@ -12,4 +12,8 @@ return [
     'updated_at' => 'Last update',
     'password' => 'Password',
     'password_confirmation' => 'Repeat Password',
+    'poster' => 'Poster',
+    'title' => 'Title',
+    'slug' => 'Slug',
+    'author' => 'Author'
 ];
