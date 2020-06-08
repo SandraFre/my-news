@@ -15,5 +15,7 @@ return [
     'poster' => 'Poster',
     'title' => 'Title',
     'slug' => 'Slug',
-    'author' => 'Author'
+    'author' => 'Author',
+    'content' => 'Content',
+    'active' => 'Active',
 ];

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Article
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\User|null $author
  */
 class Article extends Model
 {
@@ -42,4 +44,12 @@ class Article extends Model
         'user_id',
         'active',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function author(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }
