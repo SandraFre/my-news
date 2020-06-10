@@ -19,6 +19,7 @@ Route::get('article/{slug}', 'ArticleController@show')->name('article.show');
 
 Auth::routes(['verify' => true]);
 
+
 Route::middleware('verified')->group(function () {
     Route::prefix('account')->name('account.')->group(function () {
         Route::get('/', 'AccountController@index')->name('index');
@@ -28,6 +29,9 @@ Route::middleware('verified')->group(function () {
         Route::resource('article', 'Account\\ArticleController')->except(['show', 'destroy']);
     });
 });
+
+Route::post('comment', 'CommentController@store')->name('comment.store');
+
 
 //----------------------------------------
 // Admin side routes

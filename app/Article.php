@@ -1,11 +1,16 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+
 
 /**
  * App\Article
@@ -17,25 +22,30 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string|null $poster
  * @property int|null $user_id
  * @property int $active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article wherePoster($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Article whereUserId($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read User|null $author
+ * @property-read Collection|ArticleComment[] $comments
+ * @property-read int|null $comments_count
+ * @method static Builder|Article newModelQuery()
+ * @method static Builder|Article newQuery()
+ * @method static Builder|Article query()
+ * @method static Builder|Article whereActive($value)
+ * @method static Builder|Article whereContent($value)
+ * @method static Builder|Article whereCreatedAt($value)
+ * @method static Builder|Article whereId($value)
+ * @method static Builder|Article wherePoster($value)
+ * @method static Builder|Article whereSlug($value)
+ * @method static Builder|Article whereTitle($value)
+ * @method static Builder|Article whereUpdatedAt($value)
+ * @method static Builder|Article whereUserId($value)
  * @mixin \Eloquent
- * @property-read \App\User|null $author
  */
 class Article extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
         'slug',
@@ -51,5 +61,13 @@ class Article extends Model
     public function author(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArticleComment::class);
     }
 }
