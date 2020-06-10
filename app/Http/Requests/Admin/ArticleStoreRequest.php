@@ -86,7 +86,7 @@ class ArticleStoreRequest extends FormRequest
     /**
      * @return string
      */
-    protected function getTitle(): string
+    protected function getTitle(): ?string
     {
         return $this->input('title');
     }

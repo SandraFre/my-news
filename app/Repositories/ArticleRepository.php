@@ -29,4 +29,12 @@ class ArticleRepository
             ->where('slug', '=', $slug)
             ->firstOrFail();
     }
+
+    public function getPaginateByAccountId($accountId): LengthAwarePaginator
+    {
+        return Article::query()
+        ->where('user_id', '=', $accountId)
+        ->orderByDesc('created_at')
+        ->paginate();
+    }
 }
