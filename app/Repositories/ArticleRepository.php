@@ -33,8 +33,15 @@ class ArticleRepository
     public function getPaginateByAccountId($accountId): LengthAwarePaginator
     {
         return Article::query()
-        ->where('user_id', '=', $accountId)
-        ->orderByDesc('created_at')
-        ->paginate();
+            ->where('user_id', '=', $accountId)
+            ->orderByDesc('created_at')
+            ->paginate();
+    }
+
+    public function changeActive(int $id, bool $active = false): int
+    {
+        return Article::query()
+            ->where('id', $id)
+            ->update(['active' => $active]);
     }
 }

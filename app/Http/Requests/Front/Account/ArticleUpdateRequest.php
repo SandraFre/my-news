@@ -39,7 +39,6 @@ class ArticleUpdateRequest extends AdminArticleUpdateRequest
             'title' => $this->getTitle(),
             'slug' => $this->getSlug(),
             'content' => $this->input('content'),
-            'active' => false,
         ];
 
         if ($this->file('poster')) {
